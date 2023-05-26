@@ -23,9 +23,10 @@
   </ul>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-top:80px; text-align:center">
   {% for image in images %}
-      {{ image|safe }}
+      {{ image|safe }} <!-- untuk merender respon HTML di Ninja kita gunakan |safe -->
+      <a href="{{ image.find('a')['href']|safe }}">{{ image.find('span').find('img')['title']|safe }}</a>
   {% endfor%}
 </div>
 
