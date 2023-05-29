@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     # return 'Test'
-    return render_template('index.html')
+    return render_template('base.html')
 # masuk ke terminal dan jalankan python run.py
 # untuk return 'Test' ketika sudah masuk local host maka akan muncul Test
 # kemudian dirubah menjadi return render_template('index.html')
@@ -31,7 +31,13 @@ def news_popular():
     titles = news_populer.find_all(attrs={'class': 'title'})
     images = news_populer.find_all(attrs={'class': 'ratiobox box_thumb'})
 
-    return render_template('index.html', images=images)
+    return render_template('detik-scraper.html', images=images)
+
+@app.route('/idr-rates')
+def idr_rates():
+    source = requests.get('http://www.floatrates.com/daily/idr.json')
+    json_data = source.json()
+    return render_template('idr-rates.html', datas=json_data.values())
 
 
 
